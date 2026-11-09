@@ -9,6 +9,9 @@
 | A | [トップ](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/a/home) | [一覧](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/a/operation) | 人物イラスト・鮮やかなコミック調カード |
 | B | [トップ](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/b/home) | [一覧](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/b/operation) | クレイ立体イラスト・カラフルなブロック |
 | D（4案目） | [トップ](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/d/home) | [一覧](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/d/operation) | 白い4枚のカード・短いチェック項目・人物の案内 |
+| F | [トップ](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/f/home) | [一覧](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/f/operation) | 手描きの人物・パステル4色・最大幅960px |
+
+Fには [個別相談ページ](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/f/consult) もあります。案内・入力フォーム・確認画面を試せます。入力はページのメモリ内のみで保持し、再読み込みで消えます。申込・メール送信は接続せず、確認画面の送信ボタンは無効です。サービス説明・「60分」「1分」等はデザイン検討用の仮原稿です。
 
 C案は比較対象から外しています。サイト名は「フクシル」。ロゴ上の歯車状の飾りはありません。
 
