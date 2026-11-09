@@ -11,6 +11,8 @@
 | D（4案目） | [トップ](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/d/home) | [一覧](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/d/operation) | 白い4枚のカード・短いチェック項目・人物の案内 |
 | F | [トップ](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/f/home) | [一覧](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/f/operation) | 手描きの人物・パステル4色・最大幅960px |
 
+Gは [トップ](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/g/home)・[資料一覧](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/g/operation)・[個別相談](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/g/consult) の3ページです。参考の構成・文字・淡い4色に寄せ、イラスト6点を作成しました。本文の最大幅は900px。資料一覧は右側に解説動画の表示見本を設けています。有料会員案内は含みません。
+
 Fには [個別相談ページ](https://tamir-ichikawa.github.io/fukushiru-design-samples/#/f/consult) もあります。案内・入力フォーム・確認画面を試せます。入力はページのメモリ内のみで保持し、再読み込みで消えます。申込・メール送信は接続せず、確認画面の送信ボタンは無効です。サービス説明・「60分」「1分」等はデザイン検討用の仮原稿です。
 
 C案は比較対象から外しています。サイト名は「フクシル」。ロゴ上の歯車状の飾りはありません。
@@ -23,7 +25,7 @@ C案は比較対象から外しています。サイト名は「フクシル」�
 - ブックマークはメモリ内のみで、再読み込みするとリセットされます。
 - 認証・アカウント・データベース・本番API・本番ストレージへの接続はありません。
 - このリポジトリは、本番システムのソース・原本・参考画像・運用データを含みません。
-- オリジナルのAI生成イラストを使用しています。
+- AI生成イラストを使用しています。Gのイラストはユーザー提供の参考画像に基づいて作成しています。
 
 ## PCでの確認
 

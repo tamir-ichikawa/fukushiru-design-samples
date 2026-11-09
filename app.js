@@ -5,7 +5,8 @@ const designs = {
   a: {name:'イラストポップ', label:'A', heading:'福祉のしごとに、<br><span>頼れる資料を。</span>', intro:'探して、見つけて。毎日の運営をもっと軽やかに。', image:'hero-a.png'},
   b: {name:'カラフルブロック', label:'B', heading:'必要なものが、<br><span>ぱっと見つかる。</span>', intro:'運営も、研修も。ここから、さくさく。', image:'hero-b.png'},
   d: {name:'すっきり案内', label:'D', heading:'探していた資料に、<br><span>すぐ、たどり着く。</span>', intro:'運営に必要なものを、4つの入口から。'},
-  f: {name:'やさしい線画', label:'F'}
+  f: {name:'やさしい線画', label:'F'},
+  g: {name:'参考レイアウト', label:'G'}
 };
 const categories = [
   {id:'operation', name:'運営・手続き', short:'運営', words:'規程・届出・チェックリスト', icon:'document',topics:['運営規程','届出・手続き','チェックリスト','契約・同意']},
@@ -90,14 +91,15 @@ function route(){
   const [candidate='a',section='home']=path.split('/');
   const design=designs[candidate]?candidate:'a';
   const category=categories.find(c=>c.id===section)||categories[0];
-  const sections=['home',...categories.map(c=>c.id),...(design==='f'?['consult','consult-confirm']:[])];
+  const sections=['home',...categories.map(c=>c.id),...(['f','g'].includes(design)?['consult','consult-confirm']:[])];
   return {design,section:sections.includes(section)?section:'home',category,params:new URLSearchParams(query)};
 }
-function link(design, section='home',params){if(design!=='f'&&section.startsWith('consult'))section='home';const q=params?.toString();return `#/${design}/${section}${q?'?'+q:''}`;}
+function link(design, section='home',params){if(!['f','g'].includes(design)&&section.startsWith('consult'))section='home';const q=params?.toString();return `#/${design}/${section}${q?'?'+q:''}`;}
 function comparisonBar(r){
   return `<aside class="comparison-bar" aria-label="デザイン比較"><div class="comparison-inner"><span class="comparison-label">デザイン比較</span><nav aria-label="デザイン案">${Object.entries(designs).map(([key,d])=>`<a href="${link(key,r.section,r.params)}" class="design-choice ${key===r.design?'active':''}" ${key===r.design?'aria-current="true"':''}><span>${d.label}</span><b>${d.name}</b></a>`).join('')}</nav><span class="mock-label"><i></i>デザイン見本<span>・架空データ</span></span></div></aside>`;
 }
 function header(r){
+  if(r.design==='g')return gHeader(r);
   if(r.design==='f')return fHeader(r);
   return `<header class="site-header"><div class="shell header-inner"><a class="brand" href="${link(r.design)}" aria-label="フクシル ホーム">${icon('book')}<span>フクシル</span></a><nav class="site-nav" aria-label="メインメニュー"><a class="${r.section==='home'?'current':''}" href="${link(r.design)}">ホーム</a><a class="${r.section!=='home'?'current':''}" href="${link(r.design,'operation')}">資料を探す ${icon('search')}</a></nav><span class="member-label">${icon('user')}会員ページ</span></div></header>`;
 }
@@ -113,6 +115,7 @@ function guideHome(r){
 }
 
 function home(r){
+  if(r.design==='g')return gHome(r);
   if(r.design==='f')return fHome(r);
   if(r.design==='d')return guideHome(r);
   const d=designs[r.design];
@@ -134,6 +137,7 @@ function documentCard(doc){
   return `<article class="document-card cat-${doc.category}"><a href="#preview-${doc.id}" class="document-thumb" data-preview="${doc.id}" aria-label="${esc(doc.title)}の表示見本を開く">${documentArt(doc)}<span class="format-badge fmt-${doc.format==='Excel'?'excel':doc.format==='Word'?'word':doc.format==='動画'?'video':'pdf'}">${doc.format}</span></a><div class="document-copy"><span class="topic-badge">${doc.topic}</span><h3><a href="#preview-${doc.id}" data-preview="${doc.id}">${esc(doc.title)}</a></h3><p>${doc.description}</p><a class="document-open" href="#preview-${doc.id}" data-preview="${doc.id}">資料を見る ${icon('arrow')}</a></div><button type="button" class="bookmark ${saved?'is-saved':''}" data-bookmark="${doc.id}" aria-label="${esc(doc.title)}を${saved?'保存から外す':'保存する'}" aria-pressed="${saved}">${icon('bookmark')}</button></article>`;
 }
 function list(r){
+  if(r.design==='g')return gList(r);
   const c=r.category,all=r.params.get('scope')==='all',q=r.params.get('q')||'',topic=r.params.get('topic')||'',format=r.params.get('format')||'';
   const sort=r.params.get('sort')||'default';
   const tokens=normalize(q).split(/\s+/).filter(Boolean);
@@ -146,10 +150,10 @@ function list(r){
 function render(){
   const r=route();
   if(/^#\/c(?:\/|$)/.test(location.hash))history.replaceState(null,'',link(r.design,r.section,r.params));
-  const consult=r.design==='f'&&r.section.startsWith('consult');
+  const consult=['f','g'].includes(r.design)&&r.section.startsWith('consult');
   document.body.className=`design-${r.design} page-${consult?'consult':r.section==='home'?'home':'list'}`;
   document.title=`${designs[r.design].label} ${designs[r.design].name}｜${consult?(r.section==='consult-confirm'?'入力内容の確認':'個別相談'):r.section==='home'?'ホーム':r.category.name}｜フクシル`;
-  const content=consult?(r.section==='consult-confirm'?fConsultConfirm(r):fConsultPage(r)):r.section==='home'?home(r):list(r);
+  const content=consult?(r.design==='g'?(r.section==='consult-confirm'?gConsultConfirm(r):gConsultPage(r)):(r.section==='consult-confirm'?fConsultConfirm(r):fConsultPage(r))):r.section==='home'?home(r):list(r);
   app.innerHTML=comparisonBar(r)+header(r)+content+`<footer class="site-footer shell"><a class="footer-brand" href="${link(r.design)}">${icon('book')}フクシル</a><a href="${link(r.design,r.section==='home'?'operation':'home')}">${r.section==='home'?'資料を探す':'ホームへ戻る'} ${icon('arrow')}</a></footer>`;
 }
 function updateParam(key,value){
